@@ -212,15 +212,9 @@ textarea.fc{resize:vertical;min-height:68px}
   .hdr-brand .vsep,.hdr-brand .sub,.hdr-date{display:none}
   .hdr-right{gap:4px}
   .btn-hdr{display:none}
-  #hdr-reset-btn{display:none}
-  /* Show only + Add Task and hamburger */
+  /* Compact + Add Task */
   .btn-gold{padding:5px 10px;font-size:11px}
 
-  /* Mobile hamburger menu */
-  .mob-menu-btn{display:flex!important;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;width:34px;height:34px;border-radius:var(--r);align-items:center;justify-content:center;cursor:pointer;font-size:18px}
-  .mob-menu{display:none;position:fixed;top:52px;right:0;left:0;background:var(--navy);z-index:150;padding:12px;gap:8px;flex-direction:column;box-shadow:0 8px 24px rgba(0,0,0,.3)}
-  .mob-menu.on{display:flex}
-  .mob-menu .btn{width:100%;justify-content:center;padding:10px;font-size:13px}
 
   /* Bottom nav replaces top nav */
   .nav{display:none}
@@ -326,19 +320,10 @@ textarea.fc{resize:vertical;min-height:68px}
     <button class="btn btn-sm btn-hdr" onclick="openCtrModal()">Contractors</button>
     <button class="btn btn-sm btn-hdr" onclick="doExport()">&#8595; Export</button>
     <button class="btn btn-sm btn-hdr" onclick="doImport()">&#8593; Import</button>
-    <button class="btn btn-sm" style="color:rgba(255,160,160,.9);border-color:rgba(255,80,80,.2);background:rgba(255,60,60,.07)" onclick="doReset()">Reset</button>
     <button class="btn btn-sm btn-gold" onclick="openAddTask('')">&#43; Add Task</button>
-    <button class="mob-menu-btn" style="display:none" onclick="toggleMobMenu()" id="mob-menu-toggle">&#9776;</button>
   </div>
 </div>
 
-<!-- MOBILE MENU -->
-<div class="mob-menu" id="mob-menu">
-  <button class="btn btn-hdr" onclick="openCtrModal();toggleMobMenu()">&#128100; Contractors</button>
-  <button class="btn btn-hdr" onclick="doExport();toggleMobMenu()">&#8595; Export</button>
-  <button class="btn btn-hdr" onclick="doImport();toggleMobMenu()">&#8593; Import</button>
-  <button class="btn" style="color:rgba(255,160,160,.9);border-color:rgba(255,80,80,.2);background:rgba(255,60,60,.1)" onclick="doReset();toggleMobMenu()">&#9888; Reset</button>
-</div>
 
 <!-- NAV -->
 <div class="nav">
@@ -1380,24 +1365,7 @@ function applyMobLayout(){
     if(isMob){ bn.style.display='flex'; nav.style.display='none'; }
     else { bn.style.display='none'; nav.style.display='flex'; }
   }
-  // Hamburger
-  const mb=document.getElementById('mob-menu-toggle');
-  if(mb) mb.style.display=isMob?'flex':'none';
 }
-
-function toggleMobMenu(){
-  const m=document.getElementById('mob-menu');
-  if(m) m.classList.toggle('on');
-}
-
-// Close mob menu when clicking outside
-document.addEventListener('click',function(e){
-  const menu=document.getElementById('mob-menu');
-  const btn=document.getElementById('mob-menu-toggle');
-  if(menu&&menu.classList.contains('on')&&!menu.contains(e.target)&&e.target!==btn){
-    menu.classList.remove('on');
-  }
-});
 
 window.addEventListener('resize', function(){
   applyMobLayout();
